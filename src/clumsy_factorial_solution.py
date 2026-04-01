@@ -26,7 +26,15 @@ class ClumsyFactorialSolution:
     stack = deque()
 
     def clumsy(self, n: int) -> int:
+
+        if n == 1:
+            return n
+
         self.build_calculation_and_apply_multiplicatives(n)
+
+        is_result_found_already = len(self.stack) == 1
+        if is_result_found_already:
+            return self.stack.pop()
 
 	    # Reverse the stack so operations are applied left to right.
         self.stack.reverse()
@@ -40,7 +48,8 @@ class ClumsyFactorialSolution:
     def build_calculation_and_apply_multiplicatives(self, n: int, current_op_index: int = 0) -> None:
 
         if n == 1:
-            if not self.is_top_element_an_int():
+            is_final_one_in_expression = not self.is_top_element_an_int()
+            if is_final_one_in_expression:
                 self.stack.append(1)
 
         elif n != 1:
