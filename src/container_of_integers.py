@@ -1,3 +1,5 @@
+from src.binary_search_solution import BinarySearchSolution
+
 class Container:
     """
     A container of integers that should support
@@ -15,11 +17,22 @@ class Container:
                     return i
     
     def get_index_for_delete(self, value: int) -> int:
+        #return self.index_search_linear(value)
+        
+        return self.index_search_binary(value)
+    
+    def index_search_linear(self, value: int) -> int:
         for i, element in enumerate(self.data):
                 if element == value:
                     return i
         
         return -1
+
+    def index_search_binary(self, value: int) -> int:
+        binary_search = BinarySearchSolution()
+
+        return binary_search.search(self.data, value)
+
     
     def add(self, value: int) -> None:
         if self.get_length() == 0 or self.data[-1] <= value:
